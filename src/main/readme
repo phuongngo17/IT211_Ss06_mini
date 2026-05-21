@@ -1,0 +1,88 @@
+Các bước kiểm thử với Postman
+GET all (phân trang, sắp xếp)
+
+URL: GET http://localhost:8080/api/courses?page=0&size=5&sort=price,desc
+
+Kiểm tra dữ liệu trả về có đúng số lượng, đúng thứ tự.
+
+GET by ID thành công
+
+URL: GET http://localhost:8080/api/courses/1
+
+Trả về object khóa học.
+
+GET by ID thất bại (404)
+
+URL: GET http://localhost:8080/api/courses/999
+
+Trả về status 404.
+
+POST thêm khóa học
+
+URL: POST http://localhost:8080/api/courses
+
+Body (JSON):
+
+json
+{
+  "name": "Spring Boot nâng cao",
+  "description": "REST API, bảo mật, upload file",
+  "price": 299.0
+}
+Trả về 201 + object vừa tạo.
+
+PUT cập nhật toàn bộ
+
+URL: PUT http://localhost:8080/api/courses/1
+
+Body:
+
+json
+{
+  "name": "Spring Boot Mastery",
+  "description": "Full REST API",
+  "price": 399.0
+}
+PUT thất bại (sai ID)
+
+URL: PUT http://localhost:8080/api/courses/999 → 404.
+
+PATCH cập nhật price
+
+URL: PATCH http://localhost:8080/api/courses/1
+
+Body:
+
+json
+{ "price": 249.0 }
+PATCH cập nhật name
+
+Body:
+
+json
+{ "name": "React JS Mastery" }
+PATCH thất bại (sai ID) → 404.
+
+DELETE thành công
+
+URL: DELETE http://localhost:8080/api/courses/1 → 204.
+
+DELETE thất bại (sai ID) → 404.
+
+UPLOAD ảnh thành công
+
+URL: POST http://localhost:8080/api/courses/{id}/upload
+
+Body: form-data → key: file, value: chọn ảnh .jpg/.png.
+
+UPLOAD ảnh thất bại
+
+File quá lớn (>5MB) hoặc sai định dạng → 400.
+
+DELETE ảnh thành công
+
+URL: DELETE http://localhost:8080/api/courses/{id}/image → 204.
+
+DELETE ảnh thất bại
+
+Khóa học không có ảnh hoặc ID không tồn tại → 404.
